@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hitzet — Security Software Developer</title>
+  <meta name="description" content="Detection, Security, Anomaly Detection, Log Analysis — Building tools that see what others miss.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-terminal: #0d1117;
+      --bg-card: #161b22;
+      --green: #00ff41;
+      --green-dim: #00cc33;
+      --cyan: #00d4ff;
+      --text: #c9d1d9;
+      --text-dim: #6e7681;
+      --border: #30363d;
+      --red: #ff4444;
+      --yellow: #ffaa00;
+      --green-dot: #00ff41;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Scanline overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 255, 65, 0.015) 2px,
+        rgba(0, 255, 65, 0.015) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* Terminal Window */
+    .terminal {
+      background: var(--bg-terminal);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      overflow: hidden;
+    }
+
+    .terminal-bar {
+      background: #1c2128;
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+    .terminal-dot.red { background: var(--red); }
+    .terminal-dot.yellow { background: var(--yellow); }
+    .terminal-dot.green { background: var(--green-dot); }
+
+    .terminal-title {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      margin-left: 0.5rem;
+    }
+
+    .terminal-body {
+      padding: 1.5rem;
+      line-height: 1.8;
+    }
+
+    .prompt {
+      color: var(--green);
+      font-weight: 500;
+    }
+
+    .prompt-user { color: var(--cyan); }
+    .prompt-at { color: var(--text-dim); }
+    .prompt-host { color: var(--green); }
+    .prompt-path { color: #bd93f9; }
+    .prompt-symbol { color: var(--green); }
+
+    .command { color: #f8f8f2; }
+    .flag { color: var(--yellow); }
+    .string { color: #50fa7b; }
+    .comment { color: var(--text-dim); }
+
+    .output { color: var(--text); margin: 0.3rem 0; }
+    .output-highlight { color: var(--cyan); }
+
+    /* Typing cursor */
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background: var(--green);
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Typing animation for hero text */
+    .typing-line {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid var(--green);
+      width: 0;
+      animation: typing 2s steps(40) 0.5s forwards, blink-caret 0.75s step-end 8;
+    }
+
+    @keyframes typing {
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      50% { border-color: transparent; }
+    }
+
+    /* Section headers */
+    .section-header {
+      color: var(--green);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Skills grid */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .skill-tag {
+      background: rgba(0, 255, 65, 0.08);
+      border: 1px solid rgba(0, 255, 65, 0.25);
+      color: var(--green);
+      padding: 0.35rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all 0.2s ease;
+    }
+
+    .skill-tag:hover {
+      background: rgba(0, 255, 65, 0.15);
+      border-color: var(--green);
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.15);
+    }
+
+    .skill-tag.highlight {
+      background: rgba(0, 212, 255, 0.08);
+      border-color: rgba(0, 212, 255, 0.25);
+      color: var(--cyan);
+    }
+
+    .skill-tag.highlight:hover {
+      background: rgba(0, 212, 255, 0.15);
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.15);
+    }
+
+    /* Focus areas */
+    .focus-list {
+      list-style: none;
+      margin-top: 0.8rem;
+    }
+
+    .focus-list li {
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .focus-list li::before {
+      content: '>';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .focus-label {
+      color: var(--cyan);
+      font-weight: 500;
+    }
+
+    /* Projects placeholder */
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.2rem;
+      margin-top: 0.8rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      border-color: var(--green-dim);
+    }
+
+    .project-name {
+      color: var(--cyan);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .project-desc {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      margin-top: 0.4rem;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .project-tag {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      background: rgba(110, 118, 129, 0.1);
+      border: 1px solid rgba(110, 118, 129, 0.2);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    /* Status bar */
+    .status-bar {
+      background: #1c2128;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .status-left { color: var(--text-dim); }
+    .status-right { display: flex; gap: 1.5rem; }
+
+    .status-item { color: var(--text-dim); }
+    .status-item a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .status-item a:hover { color: var(--green); }
+
+    /* Glitch effect on hover */
+    .glitch-hover {
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch-hover:hover {
+      animation: glitch 0.3s ease;
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 1px); }
+      40% { transform: translate(2px, -1px); }
+      60% { transform: translate(-1px, -1px); }
+      80% { transform: translate(1px, 1px); }
+      100% { transform: translate(0); }
+    }
+
+    /* Fade in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container { padding: 1rem; }
+      .terminal-body { padding: 1rem; font-size: 0.85rem; }
+      .status-bar { flex-direction: column; align-items: flex-start; }
+      .status-right { flex-direction: column; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Hero Terminal -->
+  <div class="terminal fade-in">
+    <div class="terminal-bar">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">hitzet@security — bash</span>
+    </div>
+    <div class="terminal-body">
+      <div>
+        <span class="prompt-user">hitzet</span><span class="prompt-at">@</span><span class="prompt-host">security</span><span class="prompt-at">:</span><span class="prompt-path">~</span><span class="prompt-symbol">$</span>
+        <span class="command"> cat</span> <span class="flag">--about</span> <span class="string">./profile</span>
+      </div>
+      <div class="output" style="margin-top: 1rem;">
+        <span class="output-highlight" id="hero-text"></span><span class="cursor" id="hero-cursor"></span>
+      </div>
+      <div class="output" style="margin-top: 0.5rem;">
+        <span class="comment"># Building tools that see what others miss.</span>
+      </div>
+      <div style="margin-top: 1.2rem;">
+        <span class="prompt-user">hitzet</span><span class="prompt-at">@</span><span class="prompt-host">security</span><span class="prompt-at">:</span><span class="prompt-path">~</span><span class="prompt-symbol">$</span>
+        <span class="cursor"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <div class="terminal fade-in">
+    <div class="terminal-bar">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">about.md</span>
+    </div>
+    <div class="terminal-body">
+      <div class="section-header">[ ABOUT ]</div>
+      <div class="output">
+        Security software developer specializing in building detection
+        systems and analytical tools. Focused on identifying threats,
+        anomalies, and patterns that hide in plain sight.
+      </div>
+      <div class="output" style="margin-top: 1rem;">
+        <span class="comment">#!/usr/bin/env focus</span>
+      </div>
+      <ul class="focus-list">
+        <li><span class="focus-label">Threat Detection</span> — Real-time monitoring and alerting systems</li>
+        <li><span class="focus-label">Anomaly Detection</span> — ML-driven behavioral analysis engines</li>
+        <li><span class="focus-label">Log Analysis</span> — High-volume log parsing, correlation, and forensics</li>
+        <li><span class="focus-label">Security Tooling</span> — SIEM integration, detection rules, and automation</li>
+        <li><span class="focus-label">Prevention</span> — Proactive defense and mitigation frameworks</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div class="terminal fade-in">
+    <div class="terminal-bar">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">skills.json</span>
+    </div>
+    <div class="terminal-body">
+      <div class="section-header">[ SKILLS ]</div>
+      <div class="skills-grid">
+        <span class="skill-tag highlight">Anomaly Detection</span>
+        <span class="skill-tag highlight">Threat Detection</span>
+        <span class="skill-tag highlight">Log Analysis</span>
+        <span class="skill-tag highlight">SIEM</span>
+        <span class="skill-tag highlight">Incident Response</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Go</span>
+        <span class="skill-tag">Rust</span>
+        <span class="skill-tag">Elasticsearch</span>
+        <span class="skill-tag">Kafka</span>
+        <span class="skill-tag">Sigma Rules</span>
+        <span class="skill-tag">YARA</span>
+        <span class="skill-tag">Suricata</span>
+        <span class="skill-tag">Splunk</span>
+        <span class="skill-tag">Linux</span>
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Kubernetes</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="terminal fade-in">
+    <div class="terminal-bar">
+      <div class="terminal-dot red"></div>
+      <div class="terminal-dot yellow"></div>
+      <div class="terminal-dot green"></div>
+      <span class="terminal-title">projects/</span>
+    </div>
+    <div class="terminal-body">
+      <div class="section-header">[ PROJECTS ]</div>
+      <div class="output">
+        <span class="prompt-user">hitzet</span><span class="prompt-at">@</span><span class="prompt-host">security</span><span class="prompt-at">:</span><span class="prompt-path">~/projects</span><span class="prompt-symbol">$</span>
+        <span class="command"> ls</span> <span class="flag">-la</span>
+      </div>
+
+      <div class="project-card">
+        <div class="project-name">coming_soon/</div>
+        <div class="project-desc">Detection engines and security tools — currently in development.</div>
+        <div class="project-tags">
+          <span class="project-tag">detection</span>
+          <span class="project-tag">analysis</span>
+          <span class="project-tag">security</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar fade-in">
+    <div class="status-left">
+      <span class="glitch-hover">hitzet</span> — security software developer
+    </div>
+    <div class="status-right">
+      <span class="status-item">
+        <a href="https://github.com/hitzet" target="_blank" rel="noopener noreferrer">github.com/hitzet</a>
+      </span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Typing animation for hero text
+  const heroText = 'Security Software Developer';
+  const heroEl = document.getElementById('hero-text');
+  const heroCursor = document.getElementById('hero-cursor');
+  let i = 0;
+
+  function typeHero() {
+    if (i < heroText.length) {
+      heroEl.textContent += heroText.charAt(i);
+      i++;
+      setTimeout(typeHero, 60 + Math.random() * 40);
+    } else {
+      heroCursor.style.display = 'none';
+    }
+  }
+
+  setTimeout(typeHero, 800);
+
+  // Fade-in on scroll
+  const faders = document.querySelectorAll('.fade-in');
+
+  const observerOpts = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -30px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOpts);
+
+  faders.forEach(el => observer.observe(el));
+
+  // Trigger first terminal immediately
+  setTimeout(() => {
+    faders[0].classList.add('visible');
+  }, 100);
+</script>
+
+</body>
+</html>
