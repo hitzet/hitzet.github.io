@@ -325,18 +325,79 @@
       transform: translateY(0);
     }
 
+    /* ASCII Art Title */
+    .ascii-title {
+      text-align: center;
+      padding: 2.5rem 1rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .ascii-art {
+      color: var(--green);
+      font-size: 0.55rem;
+      line-height: 1.15;
+      white-space: pre;
+      display: inline-block;
+      text-shadow: 0 0 8px rgba(0, 255, 65, 0.4), 0 0 20px rgba(0, 255, 65, 0.15);
+      animation: flicker 4s ease-in-out infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; text-shadow: 0 0 8px rgba(0, 255, 65, 0.4), 0 0 20px rgba(0, 255, 65, 0.15); }
+      92% { opacity: 1; }
+      93% { opacity: 0.8; text-shadow: 0 0 12px rgba(0, 255, 65, 0.6); }
+      94% { opacity: 1; }
+      96% { opacity: 0.9; }
+      97% { opacity: 1; }
+    }
+
+    .ascii-subtitle {
+      color: var(--cyan);
+      font-size: 0.8rem;
+      letter-spacing: 0.5em;
+      margin-top: 1rem;
+      text-transform: uppercase;
+    }
+
+    .ascii-line {
+      color: var(--border);
+      font-size: 0.7rem;
+      margin-top: 0.8rem;
+      letter-spacing: 0.2em;
+    }
+
     /* Responsive */
     @media (max-width: 600px) {
       .container { padding: 1rem; }
       .terminal-body { padding: 1rem; font-size: 0.85rem; }
       .status-bar { flex-direction: column; align-items: flex-start; }
       .status-right { flex-direction: column; gap: 0.3rem; }
+      .ascii-art { font-size: 0.3rem; }
+      .ascii-subtitle { font-size: 0.65rem; letter-spacing: 0.3em; }
+    }
+
+    @media (min-width: 601px) and (max-width: 768px) {
+      .ascii-art { font-size: 0.42rem; }
     }
   </style>
 </head>
 <body>
 
 <div class="container">
+
+  <!-- ASCII Art Title -->
+  <div class="ascii-title fade-in">
+    <pre class="ascii-art">
+██╗  ██╗██╗████████╗███████╗███████╗████████╗
+██║  ██║██║╚══██╔══╝╚══███╔╝██╔════╝╚══██╔══╝
+███████║██║   ██║     ███╔╝ █████╗     ██║
+██╔══██║██║   ██║    ███╔╝  ██╔══╝     ██║
+██║  ██║██║   ██║   ███████╗███████╗   ██║
+╚═╝  ╚═╝╚═╝   ╚═╝   ╚══════╝╚══════╝   ╚═╝
+    </pre>
+    <div class="ascii-subtitle">detect &middot; analyze &middot; protect</div>
+    <div class="ascii-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+  </div>
 
   <!-- Hero Terminal -->
   <div class="terminal fade-in">
