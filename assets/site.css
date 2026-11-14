@@ -1,0 +1,191 @@
+/* ── HITZET 공통 스타일 (한국어 index.html / 영어 en/index.html 이 함께 쓴다) ──
+   검은 바탕 + 오렌지 포인트. 오렌지 버블(원) 모티프로 "분포와 이상치"를 표현한다.
+   숫자·라벨은 고정폭(mono)으로 써서 계량·엔지니어링 느낌을 준다. */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0b0b0d;
+  --bg-2: #111114;
+  --surface: #151518;
+  --line: #26262c;
+  --line-soft: #1b1b20;
+  --text: #f3f3f5;
+  --text-2: #a9a9b2;
+  --text-3: #74747e;
+  --orange: #f58025;        /* 브랜드 오렌지 */
+  --orange-hi: #ff9d4d;     /* 밝은 오렌지 (어두운 바탕 위 글자) */
+  --orange-deep: #c2560c;
+  --max: 1120px;
+  --font: "Inter", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  color-scheme: dark;
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; word-break: keep-all; overflow-wrap: anywhere; }
+a { color: inherit; }
+::selection { background: var(--orange); color: #111; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+@media (min-width: 768px) { .wrap { padding: 0 32px; } }
+
+/* ── 헤더 ── */
+header { position: sticky; top: 0; z-index: 10; background: rgba(11,11,13,.82); backdrop-filter: blur(14px) saturate(1.4); border-bottom: 1px solid var(--line-soft); }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; flex-wrap: wrap; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo img { width: 30px; height: 30px; }
+.logo-text { font-family: "Rajdhani", sans-serif; font-weight: 700; font-size: 1.35rem; letter-spacing: .12em; }
+.logo-sub { font-family: var(--mono); font-size: .68rem; color: var(--text-3); letter-spacing: .04em; display: none; }
+@media (min-width: 980px) { .logo-sub { display: inline; } }
+nav ul { display: flex; gap: 2px; list-style: none; flex-wrap: wrap; align-items: center; }
+nav a { text-decoration: none; font-size: .9rem; color: var(--text-2); padding: 8px 12px; border-radius: 8px; }
+nav a:hover { color: var(--text); background: var(--surface); }
+nav .lang { font-family: var(--mono); font-size: .78rem; border: 1px solid var(--line); }
+nav .nav-cta { color: #111; background: var(--orange); margin-left: 6px; font-weight: 600; }
+nav .nav-cta:hover { color: #111; background: var(--orange-hi); }
+/* 좁은 화면: 언어 전환과 문의만 남긴다 */
+@media (max-width: 760px) { nav li.sec { display: none; } }
+
+/* ── 공통 섹션 ── */
+section { padding: 96px 0; position: relative; }
+@media (max-width: 640px) { section { padding: 68px 0; } }
+.label { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--orange-hi); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.label::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 12px var(--orange); }
+h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.25; letter-spacing: -.035em; font-weight: 700; }
+.lead { color: var(--text-2); font-size: 1.08rem; max-width: 62ch; margin-top: 16px; }
+.head { display: grid; gap: 0 56px; grid-template-columns: minmax(0, 1fr); margin-bottom: 52px; }
+@media (min-width: 960px) { .head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; } .head .lead { margin-top: 0; } }
+.head > * { min-width: 0; }
+.band { background: var(--bg-2); border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
+
+/* ── 히어로 ── */
+.hero { padding: 104px 0 96px; overflow: hidden; }
+/* 오렌지 버블 그림 (오른쪽) */
+.bubbles { width: 100%; max-width: 460px; justify-self: end; }
+@media (max-width: 999px) { .bubbles { justify-self: start; max-width: 340px; } }
+.bubbles .rise { animation: rise 9s ease-in-out infinite alternate; transform-origin: center; transform-box: fill-box; }
+.bubbles .rise.d2 { animation-duration: 11s; animation-delay: -3s; }
+.bubbles .rise.d3 { animation-duration: 13s; animation-delay: -6s; }
+@keyframes rise { from { transform: translateY(6px); } to { transform: translateY(-10px); } }
+.hero-glow { position: absolute; width: 720px; height: 720px; right: -220px; top: -260px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(245,128,37,.22), transparent 62%); }
+.hero-grid { position: relative; display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr); align-items: center; }
+@media (min-width: 1000px) { .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); } }
+.hero-grid > * { min-width: 0; }
+.badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .74rem; color: var(--text-2); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px 5px 6px; background: var(--surface); margin-bottom: 26px; }
+.badge b { background: var(--orange); color: #111; font-weight: 600; border-radius: 999px; padding: 1px 9px; }
+.hero h1 { font-size: clamp(2.4rem, 5.4vw, 4rem); line-height: 1.12; letter-spacing: -.045em; font-weight: 800; }
+.hero h1 em { font-style: normal; color: var(--orange); }
+.hero .lead { font-size: 1.14rem; margin-top: 22px; }
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: .92rem; border-radius: 8px; padding: 12px 20px; border: 1px solid transparent; transition: background .15s, border-color .15s; }
+.btn-orange { background: var(--orange); color: #111; }
+.btn-orange:hover { background: var(--orange-hi); }
+.btn-line { border-color: var(--line); color: var(--text); }
+.btn-line:hover { border-color: var(--text-3); }
+.arr { font-family: var(--mono); }
+
+/* ── 의뢰 흐름 카드 ── */
+.brief { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; margin-top: 44px; max-width: 640px; }
+.brief-top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: .72rem; color: var(--text-3); padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.brief ol { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr)); }
+.brief li { padding: 14px 16px; border-right: 1px solid var(--line); }
+.brief li:last-child { border-right: 0; }
+@media (max-width: 600px) { .brief li { border-right: 0; border-bottom: 1px dashed var(--line); } }
+.brief .n { font-family: var(--mono); font-size: .72rem; color: var(--orange-hi); display: block; }
+.brief b { font-size: .9rem; display: block; margin-top: 2px; }
+
+/* ── ORFE 띠 ── */
+.orfe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
+.orfe-grid div { padding: 26px 24px; border-right: 1px solid var(--line-soft); }
+.orfe-grid div:last-child { border-right: 0; }
+@media (max-width: 900px) { .orfe-grid div { border-right: 0; border-bottom: 1px solid var(--line-soft); } .orfe-grid div:last-child { border-bottom: 0; } }
+.orfe-grid small { display: block; font-family: var(--mono); font-size: .72rem; color: var(--orange-hi); letter-spacing: .06em; text-transform: uppercase; }
+.orfe-grid b { display: block; font-size: 1.05rem; margin: 6px 0 4px; letter-spacing: -.01em; }
+.orfe-grid p { font-size: .88rem; color: var(--text-2); }
+
+/* ── 전문 분야 (격자선 카드) ── */
+.practice { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.area { padding: 32px 28px 34px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); position: relative; overflow: hidden; transition: background .2s; }
+.area:hover { background: var(--surface); }
+/* 카드 모서리의 작은 오렌지 버블 — 마우스를 올리면 커진다 */
+.area::after { content: ""; position: absolute; right: 22px; top: 26px; width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, var(--orange-hi), var(--orange) 55%, var(--orange-deep)); transition: transform .3s ease; }
+.area:hover::after { transform: scale(1.8); }
+.area .idx { font-family: var(--mono); font-size: .74rem; color: var(--text-3); }
+.area h3 { font-size: 1.28rem; letter-spacing: -.02em; margin: 22px 0 2px; }
+.area .en { font-family: var(--mono); font-size: .76rem; color: var(--orange-hi); }
+.area p { color: var(--text-2); font-size: .95rem; margin-top: 12px; }
+.area ul { list-style: none; margin-top: 16px; }
+.area li { font-size: .9rem; padding: 7px 0; border-top: 1px dashed var(--line); }
+
+/* ── FDE 방식 ── */
+.fde-note { border-left: 3px solid var(--orange); background: var(--surface); padding: 18px 22px; border-radius: 0 10px 10px 0; color: var(--text-2); font-size: .98rem; max-width: 820px; margin-bottom: 44px; }
+.fde-note b { color: var(--text); }
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); border-top: 1px solid var(--line); }
+.step { padding: 26px 22px 6px 0; position: relative; }
+.step::before { content: ""; position: absolute; top: -6px; left: 0; width: 11px; height: 11px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 14px rgba(245,128,37,.7); }
+.step .wk { font-family: var(--mono); font-size: .74rem; color: var(--text-3); }
+.step h3 { font-size: 1.12rem; margin: 6px 0 8px; letter-spacing: -.01em; }
+.step p { font-size: .92rem; color: var(--text-2); }
+
+/* ── 협업 형태 ── */
+.models { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); }
+.model { border: 1px solid var(--line); border-radius: 12px; padding: 26px; background: var(--surface); display: flex; flex-direction: column; gap: 10px; transition: border-color .2s; }
+.model:hover { border-color: var(--orange-deep); }
+.model .tag { font-family: var(--mono); font-size: .72rem; color: var(--orange-hi); text-transform: uppercase; letter-spacing: .08em; }
+.model h3 { font-size: 1.1rem; letter-spacing: -.01em; }
+.model p { font-size: .92rem; color: var(--text-2); }
+.model .for { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); font-size: .84rem; color: var(--text-3); }
+
+/* ── 원칙 ── */
+.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); border-top: 1px solid var(--line); }
+.principle { padding: 26px 28px 26px 0; }
+.principle h3 { font-size: 1.06rem; margin-bottom: 6px; }
+.principle h3 span { font-family: var(--mono); color: var(--orange-hi); font-size: .82rem; margin-right: 10px; }
+.principle p { font-size: .93rem; color: var(--text-2); }
+
+/* ── 도구 ── */
+.stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.stack span { font-family: var(--mono); font-size: .78rem; color: var(--text-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; background: var(--surface); }
+
+/* ── FAQ ── */
+.faq { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); padding: 20px 0; }
+.faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: var(--mono); color: var(--orange-hi); }
+.faq details[open] summary::after { content: "−"; }
+.faq p { color: var(--text-2); margin-top: 10px; font-size: .96rem; max-width: 78ch; }
+.faq-grid { display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 960px) { .faq-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); } }
+.faq-grid > * { min-width: 0; }
+
+/* ── 문의 (오렌지 패널 + 버블) ── */
+.contact { position: relative; overflow: hidden; background: var(--orange); color: #111; border-radius: 20px; padding: clamp(36px, 6vw, 72px); display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); align-items: end; }
+@media (min-width: 900px) { .contact { grid-template-columns: minmax(0, 1fr) auto; } }
+.contact > * { min-width: 0; position: relative; }
+.contact::before, .contact::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+.contact::before { width: 360px; height: 360px; right: -90px; top: -150px; background: radial-gradient(circle at 35% 30%, #ffb066, #f58025 55%, #c2560c); opacity: .55; }
+.contact::after { width: 120px; height: 120px; right: 220px; bottom: -50px; background: radial-gradient(circle at 35% 30%, #ffb066, #f58025 55%, #c2560c); opacity: .5; }
+.contact .label { color: #111; }
+.contact .label::before { background: #111; box-shadow: none; }
+.contact p { color: #2a1505; margin-top: 14px; max-width: 58ch; }
+.contact .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn-black { background: #0b0b0d; color: #fff; }
+.btn-black:hover { background: #2a2a30; }
+.contact .btn-line { border-color: rgba(0,0,0,.35); color: #111; }
+.mail { font-family: var(--mono); font-size: .9rem; margin-top: 10px; color: #2a1505; }
+
+/* ── 푸터 ── */
+footer { border-top: 1px solid var(--line-soft); margin-top: 96px; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 28px 0 40px; font-size: .82rem; color: var(--text-3); }
+.foot a { text-decoration: none; color: var(--text-2); }
+.foot a:hover { color: var(--orange-hi); }
+.mono { font-family: var(--mono); }
+
+/* 스크롤하면 부드럽게 나타나기 (움직임 줄이기 설정이면 끔) */
+.fade { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+.fade.on { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .fade { opacity: 1; transform: none; transition: none; }
+  .bubbles .rise { animation: none; }
+  html { scroll-behavior: auto; }
+}

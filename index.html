@@ -3,263 +3,104 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HITZET — Financial Security · Fraud · Financial AI Lab</title>
+  <title>HITZET — 금융보안 · 사기탐지 · 금융 AI 랩</title>
   <meta name="description" content="HITZET은 ORFE(운영과학·금융공학)를 바탕으로 금융보안, 이상거래·사기 탐지, 금융 AI·ML, 금융 데이터사이언스 컨설팅과 솔루션, 프로페셔널 서비스를 제공하는 랩이자 스타트업입니다.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="HITZET">
-  <meta property="og:title" content="HITZET — Financial Security · Fraud · Financial AI Lab">
+  <meta property="og:title" content="HITZET — 금융보안 · 사기탐지 · 금융 AI 랩">
   <meta property="og:description" content="수학으로 금융의 위험을 먼저 봅니다. 문제 정의부터 운영 착륙까지, 의뢰인 곁에서 함께합니다.">
   <meta property="og:url" content="https://hitzet.com/">
+  <meta property="og:locale" content="ko_KR">
   <link rel="canonical" href="https://hitzet.com/">
-  <meta name="theme-color" content="#ffffff">
-  <link rel="icon" href="phoenix-nazca.svg" type="image/svg+xml">
+  <link rel="alternate" hreflang="ko" href="https://hitzet.com/">
+  <link rel="alternate" hreflang="en" href="https://hitzet.com/en/">
+  <meta name="theme-color" content="#0b0b0d">
+  <link rel="icon" href="/assets/mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-  <style>
-    /* ── HITZET 사이트 스타일 ──
-       흰 바탕 + 먹색 글자 + 레드 포인트(기존 브랜드색 유지). 장식은 줄이고 여백과 선으로 정리한다.
-       숫자·라벨은 고정폭(mono)으로 써서 "계량·엔지니어링" 느낌을 준다. */
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --bg: #ffffff;
-      --bg-soft: #f7f7f8;
-      --text: #111318;
-      --text-2: #565b66;
-      --text-3: #8b909a;
-      --accent: #e63946;
-      --accent-soft: #fdeeef;
-      --line: #e6e7ea;
-      --ink: #0d0f13;
-      --max: 1120px;
-      --font: "Inter", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
-      --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
-    }
-
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; word-break: keep-all; overflow-wrap: anywhere; }
-    a { color: inherit; }
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
-    @media (min-width: 768px) { .wrap { padding: 0 32px; } }
-
-    /* ── 헤더 ── */
-    header { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.88); backdrop-filter: blur(12px) saturate(1.4); border-bottom: 1px solid var(--line); }
-    .bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; flex-wrap: wrap; }
-    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .logo-text { font-family: "Rajdhani", sans-serif; font-weight: 700; font-size: 1.35rem; letter-spacing: .12em; }
-    .logo-sub { font-family: var(--mono); font-size: .68rem; color: var(--text-3); letter-spacing: .04em; display: none; }
-    @media (min-width: 900px) { .logo-sub { display: inline; } }
-    nav ul { display: flex; gap: 4px; list-style: none; flex-wrap: wrap; }
-    nav a { text-decoration: none; font-size: .9rem; color: var(--text-2); padding: 8px 12px; border-radius: 8px; }
-    nav a:hover { color: var(--text); background: var(--bg-soft); }
-    nav .nav-cta { color: #fff; background: var(--ink); margin-left: 6px; }
-    nav .nav-cta:hover { color: #fff; background: #2a2e36; }
-    @media (max-width: 720px) { nav li:not(:last-child) { display: none; } }
-
-    /* ── 공통 섹션 ── */
-    section { padding: 96px 0; }
-    @media (max-width: 640px) { section { padding: 68px 0; } }
-    .label { font-family: var(--mono); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
-    .label::before { content: ""; width: 20px; height: 1px; background: currentColor; }
-    h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.25; letter-spacing: -.035em; font-weight: 700; }
-    .lead { color: var(--text-2); font-size: 1.08rem; max-width: 62ch; margin-top: 16px; }
-    .head { display: grid; gap: 0 56px; grid-template-columns: minmax(0, 1fr); margin-bottom: 52px; }
-    @media (min-width: 960px) { .head { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; } .head .lead { margin-top: 0; } }
-    .head > * { min-width: 0; }
-    .soft { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-
-    /* ── 히어로 ── */
-    .hero { padding: 104px 0 88px; position: relative; overflow: hidden; }
-    /* 배경의 옅은 등고선(확률분포 곡선) — 계량 분석의 이미지 */
-    .hero-bg { position: absolute; right: -120px; top: 40px; width: 720px; max-width: 90vw; opacity: .55; pointer-events: none; }
-    .hero-grid { position: relative; display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr); align-items: center; }
-    @media (min-width: 1000px) { .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); } }
-    .hero-grid > * { min-width: 0; }
-    .badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: .74rem; color: var(--text-2); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px 5px 6px; background: #fff; margin-bottom: 26px; }
-    .badge b { background: var(--accent); color: #fff; font-weight: 500; border-radius: 999px; padding: 1px 9px; }
-    .hero h1 { font-size: clamp(2.4rem, 5.4vw, 4rem); line-height: 1.12; letter-spacing: -.045em; font-weight: 800; }
-    .hero h1 em { font-style: normal; color: var(--accent); }
-    .hero .lead { font-size: 1.14rem; margin-top: 22px; }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
-    .btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; font-size: .92rem; border-radius: 8px; padding: 12px 20px; border: 1px solid transparent; transition: background .15s, border-color .15s; }
-    .btn-dark { background: var(--ink); color: #fff; }
-    .btn-dark:hover { background: #2a2e36; }
-    .btn-line { border-color: var(--line); color: var(--text); background: #fff; }
-    .btn-line:hover { border-color: var(--text-3); }
-    .btn[aria-disabled="true"] { cursor: default; opacity: .7; }
-    .arr { font-family: var(--mono); }
-
-    /* 히어로 오른쪽: 한 의뢰의 흐름 요약 카드 */
-    .brief { border: 1px solid var(--line); border-radius: 14px; background: #fff; box-shadow: 0 30px 60px -36px rgba(17,19,24,.35); overflow: hidden; }
-    .brief-top { display: flex; justify-content: space-between; font-family: var(--mono); font-size: .72rem; color: var(--text-3); padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--bg-soft); }
-    .brief ol { list-style: none; padding: 8px 0; }
-    .brief li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 0; padding: 12px 16px; border-bottom: 1px dashed var(--line); }
-    .brief li:last-child { border-bottom: 0; }
-    /* 번호는 왼쪽 칸에 두 줄 걸쳐, 제목·설명은 오른쪽 칸에 차례로 */
-    .brief .n { grid-column: 1; grid-row: 1 / span 2; font-family: var(--mono); font-size: .75rem; color: var(--accent); padding-top: 3px; }
-    .brief b { grid-column: 2; font-size: .95rem; }
-    .brief li span:not(.n) { grid-column: 2; font-size: .84rem; color: var(--text-2); line-height: 1.55; }
-
-    /* ── ORFE 띠 ── */
-    .orfe { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .orfe-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); }
-    .orfe-grid div { padding: 26px 24px; border-right: 1px solid var(--line); }
-    .orfe-grid div:last-child { border-right: 0; }
-    @media (max-width: 900px) { .orfe-grid div { border-right: 0; border-bottom: 1px solid var(--line); } .orfe-grid div:last-child { border-bottom: 0; } }
-    .orfe-grid small { display: block; font-family: var(--mono); font-size: .72rem; color: var(--text-3); letter-spacing: .06em; text-transform: uppercase; }
-    .orfe-grid b { display: block; font-size: 1.05rem; margin: 6px 0 4px; letter-spacing: -.01em; }
-    .orfe-grid p { font-size: .88rem; color: var(--text-2); }
-
-    /* ── 전문 분야 (격자선으로 나눈 카드) ── */
-    .practice { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
-    .area { padding: 32px 28px 34px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); transition: background .2s; }
-    .area:hover { background: var(--bg-soft); }
-    .area .idx { font-family: var(--mono); font-size: .74rem; color: var(--text-3); }
-    .area h3 { font-size: 1.28rem; letter-spacing: -.02em; margin: 22px 0 2px; }
-    .area .en { font-family: var(--mono); font-size: .76rem; color: var(--accent); }
-    .area p { color: var(--text-2); font-size: .95rem; margin-top: 12px; }
-    .area ul { list-style: none; margin-top: 16px; }
-    .area li { font-size: .9rem; padding: 7px 0; border-top: 1px dashed var(--line); }
-
-    /* ── FDE 방식 ── */
-    .fde-note { border-left: 3px solid var(--accent); background: #fff; padding: 18px 22px; border-radius: 0 10px 10px 0; color: var(--text-2); font-size: .98rem; max-width: 820px; margin-bottom: 44px; }
-    .fde-note b { color: var(--text); }
-    .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); border-top: 1px solid var(--line); }
-    .step { padding: 26px 22px 6px 0; position: relative; }
-    .step::before { content: ""; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); }
-    .step .wk { font-family: var(--mono); font-size: .74rem; color: var(--text-3); }
-    .step h3 { font-size: 1.12rem; margin: 6px 0 8px; letter-spacing: -.01em; }
-    .step p { font-size: .92rem; color: var(--text-2); }
-
-    /* ── 함께 일하는 방식 ── */
-    .models { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); }
-    .model { border: 1px solid var(--line); border-radius: 12px; padding: 26px; background: #fff; display: flex; flex-direction: column; gap: 10px; }
-    .model .tag { font-family: var(--mono); font-size: .72rem; color: var(--accent); text-transform: uppercase; letter-spacing: .08em; }
-    .model h3 { font-size: 1.1rem; letter-spacing: -.01em; }
-    .model p { font-size: .92rem; color: var(--text-2); }
-    .model .for { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); font-size: .84rem; color: var(--text-3); }
-
-    /* ── 원칙 ── */
-    .principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); border-top: 1px solid var(--line); }
-    .principle { padding: 26px 28px 26px 0; }
-    .principle h3 { font-size: 1.06rem; margin-bottom: 6px; }
-    .principle h3 span { font-family: var(--mono); color: var(--accent); font-size: .82rem; margin-right: 10px; }
-    .principle p { font-size: .93rem; color: var(--text-2); }
-
-    /* ── 도구 ── */
-    .stack { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-    .stack span { font-family: var(--mono); font-size: .78rem; color: var(--text-2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; background: #fff; }
-
-    /* ── FAQ ── */
-    .faq { border-top: 1px solid var(--line); }
-    .faq details { border-bottom: 1px solid var(--line); padding: 20px 0; }
-    .faq summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
-    .faq summary::-webkit-details-marker { display: none; }
-    .faq summary::after { content: "+"; font-family: var(--mono); color: var(--accent); }
-    .faq details[open] summary::after { content: "−"; }
-    .faq p { color: var(--text-2); margin-top: 10px; font-size: .96rem; max-width: 78ch; }
-    .faq-grid { display: grid; gap: 40px; grid-template-columns: minmax(0, 1fr); }
-    @media (min-width: 960px) { .faq-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); } }
-    .faq-grid > * { min-width: 0; }
-
-    /* ── 문의 ── */
-    .contact { background: var(--ink); color: #f2f3f5; border-radius: 18px; padding: clamp(36px, 6vw, 72px); display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); align-items: end; }
-    @media (min-width: 900px) { .contact { grid-template-columns: minmax(0, 1fr) auto; } }
-    .contact > * { min-width: 0; }
-    .contact h2 { color: #fff; }
-    .contact p { color: #b5b9c2; margin-top: 14px; max-width: 58ch; }
-    .contact .btn-line { background: transparent; color: #fff; border-color: #3a3f49; }
-    .contact .btn-red { background: var(--accent); color: #fff; }
-    .contact .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-
-    /* ── 푸터 ── */
-    footer { border-top: 1px solid var(--line); margin-top: 96px; }
-    .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding: 28px 0 40px; font-size: .82rem; color: var(--text-3); }
-    .foot a { text-decoration: none; color: var(--text-2); }
-    .foot a:hover { color: var(--text); }
-    .mono { font-family: var(--mono); }
-
-    /* 스크롤하면 부드럽게 나타나기 (움직임 줄이기 설정이면 끔) */
-    .fade { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
-    .fade.on { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { .fade { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
-  </style>
+  <link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-
-<!-- 로고 심볼: 나스카 라인 스타일 불사조 (기존 브랜드 마크 유지) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <symbol id="phoenix" viewBox="0 0 512 512"><g fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"><path d="M260,250 C290,245 330,235 360,225 C375,220 385,215 390,208"/><path d="M390,208 L430,195 L420,205 L390,208"/><path d="M370,218 C365,200 358,185 365,170 C370,160 375,165 372,178"/><path d="M378,212 C378,195 380,180 390,168 C395,162 398,168 393,180"/><path d="M250,248 L200,190 L155,140 L125,108"/><path d="M266,238 L216,180 L171,130 L150,105"/><path d="M252,258 L210,320 L170,370 L140,400"/><path d="M268,265 L226,327 L186,377 L163,400"/><path d="M260,250 L210,252 L160,258 L110,272 L75,295 C55,315 50,340 65,350 C78,355 90,340 95,320 L105,300"/><path d="M160,258 L118,272 L80,295 C58,325 55,355 68,370 C82,378 95,360 98,345"/></g></symbol>
-  </defs>
-</svg>
 
 <!-- ── 헤더 ── -->
 <header>
   <div class="wrap bar">
-    <a class="logo" href="#top" aria-label="HITZET 홈">
-      <svg width="30" height="30" style="color:var(--accent)"><use href="#phoenix"/></svg>
+    <a class="logo" href="/" aria-label="HITZET 홈">
+      <img src="/assets/mark.svg" alt="" width="30" height="30">
       <span class="logo-text">HITZET</span>
       <span class="logo-sub">Financial Security · Fraud · AI Lab</span>
     </a>
     <nav aria-label="주 메뉴">
       <ul>
-        <li><a href="#practice">전문 분야</a></li>
-        <li><a href="#approach">일하는 방식</a></li>
-        <li><a href="#engagements">협업 형태</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li class="sec"><a href="#practice">전문 분야</a></li>
+        <li class="sec"><a href="#approach">일하는 방식</a></li>
+        <li class="sec"><a href="#engagements">협업 형태</a></li>
+        <li class="sec"><a href="#faq">FAQ</a></li>
+        <li><a class="lang" href="/en/" hreflang="en" lang="en">EN</a></li>
         <li><a class="nav-cta" href="#contact">문의</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
-<main id="top">
+<main>
 
 <!-- ── 히어로 ── -->
 <section class="hero">
-  <!-- 배경 장식: 겹친 분포 곡선 (정상 거래 분포와 꼬리의 이상치) -->
-  <svg class="hero-bg" viewBox="0 0 720 360" aria-hidden="true">
-    <g fill="none" stroke-width="1.2">
-      <path d="M0,330 C140,330 210,80 300,80 C390,80 460,330 720,330" stroke="#e6e7ea"/>
-      <path d="M0,330 C150,330 220,130 300,130 C380,130 450,330 720,330" stroke="#e6e7ea"/>
-      <path d="M0,330 C160,330 230,180 300,180 C370,180 440,330 720,330" stroke="#e6e7ea"/>
-      <path d="M0,330 C170,330 240,230 300,230 C360,230 430,330 720,330" stroke="#e6e7ea"/>
-      <line x1="0" y1="330" x2="720" y2="330" stroke="#e6e7ea"/>
-      <line x1="560" y1="120" x2="560" y2="330" stroke="#e63946" stroke-dasharray="4 5" opacity=".6"/>
-    </g>
-    <circle cx="610" cy="318" r="5" fill="#e63946"/>
-    <circle cx="648" cy="322" r="4" fill="#e63946" opacity=".7"/>
-    <circle cx="590" cy="312" r="3.5" fill="#e63946" opacity=".5"/>
-  </svg>
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
       <span class="badge"><b>ORFE</b> Operations Research &amp; Financial Engineering</span>
       <h1>금융의 위험을,<br><em>수학으로 먼저</em> 봅니다.</h1>
       <p class="lead">HITZET은 운영과학(OR)과 금융공학(FE)을 바탕으로 금융보안, 이상거래·사기 탐지, 금융 AI·ML, 금융 데이터사이언스를 다루는 개인 랩이자 스타트업입니다. 컨설팅과 솔루션 구축, 프로페셔널 서비스로 의뢰인의 문제가 실제 운영에서 풀릴 때까지 곁에서 함께합니다.</p>
       <div class="cta-row">
-        <a class="btn btn-dark" href="#contact">과제 상담하기 <span class="arr">→</span></a>
+        <a class="btn btn-orange" href="mailto:hitzet.soft@gmail.com?subject=%5BHITZET%5D%20%EA%B3%BC%EC%A0%9C%20%EC%83%81%EB%8B%B4">과제 상담 메일 보내기 <span class="arr">→</span></a>
         <a class="btn btn-line" href="#approach">일하는 방식 보기</a>
+      </div>
+      <!-- 한 의뢰가 진행되는 흐름 -->
+      <div class="brief" aria-label="한 의뢰가 진행되는 흐름">
+        <div class="brief-top"><span>engagement / brief</span><span>forward-deployed</span></div>
+        <ol>
+          <li><span class="n">01</span><b>현장에 들어가기</b></li>
+          <li><span class="n">02</span><b>수식으로 정의하기</b></li>
+          <li><span class="n">03</span><b>작게 만들어 검증</b></li>
+          <li><span class="n">04</span><b>운영에 착륙</b></li>
+        </ol>
       </div>
     </div>
 
-    <!-- 한 의뢰가 진행되는 흐름 요약 -->
-    <aside class="brief" aria-label="한 의뢰가 진행되는 흐름">
-      <div class="brief-top"><span>engagement / brief</span><span>forward-deployed</span></div>
-      <ol>
-        <li><span class="n">01</span><b>현장에 들어갑니다</b><span>의뢰인의 팀·데이터·규정 안에서 함께 일합니다.</span></li>
-        <li><span class="n">02</span><b>문제를 수식으로 정의합니다</b><span>손실, 제약, 목표를 숫자로 바꿔 무엇을 풀지 합의합니다.</span></li>
-        <li><span class="n">03</span><b>작게 만들어 검증합니다</b><span>탐지 모델·규칙·최적화를 실제 데이터로 시험합니다.</span></li>
-        <li><span class="n">04</span><b>운영에 착륙시킵니다</b><span>모니터링·문서·인수인계까지 마치고 빠집니다.</span></li>
-      </ol>
-    </aside>
+    <!-- 오렌지 버블: 분포(큰 원과 무리)와 그 밖으로 떨어져 나간 이상치(테두리 원) — 독자 일러스트 -->
+    <svg class="bubbles" viewBox="0 0 460 460" role="img" aria-label="오렌지 버블 일러스트: 무리에서 떨어져 나간 하나의 이상치">
+      <defs>
+        <radialGradient id="ob" cx="35%" cy="30%" r="75%">
+          <stop offset="0" stop-color="#ffb066"/><stop offset=".55" stop-color="#f58025"/><stop offset="1" stop-color="#a94a0a"/>
+        </radialGradient>
+        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#f58025" stop-opacity=".35"/><stop offset="1" stop-color="#f58025" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <circle cx="200" cy="270" r="200" fill="url(#glow)"/>
+      <g fill="none" stroke="#26262c">
+        <circle cx="200" cy="270" r="170"/><circle cx="200" cy="270" r="120"/><circle cx="200" cy="270" r="70"/>
+      </g>
+      <circle class="rise" cx="200" cy="270" r="96" fill="url(#ob)"/>
+      <circle class="rise d2" cx="318" cy="168" r="38" fill="url(#ob)"/>
+      <circle class="rise d3" cx="104" cy="148" r="24" fill="url(#ob)" opacity=".9"/>
+      <circle class="rise d2" cx="322" cy="330" r="18" fill="url(#ob)" opacity=".85"/>
+      <circle class="rise" cx="120" cy="390" r="12" fill="url(#ob)" opacity=".75"/>
+      <circle class="rise d3" cx="268" cy="96" r="9" fill="url(#ob)" opacity=".7"/>
+      <!-- 이상치: 무리에서 떨어진 테두리 버블 -->
+      <circle cx="404" cy="58" r="16" fill="none" stroke="#ff9d4d" stroke-width="2.5"/>
+      <circle cx="404" cy="58" r="28" fill="none" stroke="#ff9d4d" stroke-width="1" stroke-dasharray="3 5" opacity=".7"/>
+      <text x="404" y="106" fill="#74747e" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">outlier</text>
+    </svg>
   </div>
 </section>
 
 <!-- ── ORFE 띠: 바탕이 되는 네 가지 학문 ── -->
-<div class="orfe">
+<div class="band">
   <div class="wrap orfe-grid">
     <div><small>Optimization</small><b>최적화</b><p>한정된 인력·한도·예산을 가장 효과적으로 배분합니다.</p></div>
     <div><small>Stochastic Modeling</small><b>확률 모형</b><p>불확실성과 꼬리 위험을 분포로 다룹니다.</p></div>
@@ -314,7 +155,7 @@
         <p>시계열, 최적화, 시뮬레이션으로 경영과 운영의 질문에 답합니다. 분석이 보고서로 끝나지 않고 반복 가능한 도구로 남게 합니다.</p>
         <ul><li>시계열 예측과 시나리오 분석</li><li>몬테카를로 시뮬레이션·스트레스 테스트</li><li>포트폴리오·자원 배분 최적화</li></ul>
       </article>
-      <article class="area" style="background:var(--bg-soft)">
+      <article class="area">
         <span class="idx">+</span>
         <h3>교육과 내재화</h3>
         <span class="en">Enablement</span>
@@ -326,7 +167,7 @@
 </section>
 
 <!-- ── 일하는 방식: FDE 처럼 ── -->
-<section id="approach" class="soft fade">
+<section id="approach" class="band fade">
   <div class="wrap">
     <div class="head">
       <div>
@@ -367,7 +208,7 @@
 </section>
 
 <!-- ── 원칙 ── -->
-<section id="principles" class="soft fade">
+<section id="principles" class="band fade">
   <div class="wrap">
     <div class="head">
       <div>
@@ -391,7 +232,7 @@
   <div class="wrap">
     <p class="label">Toolbox</p>
     <h2 style="font-size:clamp(1.4rem,2.6vw,1.9rem)">익숙한 도구로, 의뢰인의 환경에 맞춰</h2>
-    <div class="stack" style="margin-top:22px">
+    <div class="stack">
       <span>Python</span><span>R</span><span>SQL</span><span>Spark</span><span>scikit-learn</span><span>XGBoost · LightGBM</span><span>PyTorch</span><span>Graph analytics</span><span>OR-Tools</span><span>Linear / Integer Programming</span><span>Monte Carlo</span><span>Time-series</span><span>LLM · RAG</span><span>Kafka</span><span>Docker</span><span>Cloud · On-premise</span>
     </div>
   </div>
@@ -434,13 +275,13 @@
   <div class="wrap">
     <div class="contact">
       <div>
-        <p class="label" style="color:#ff8a93">Contact</p>
+        <p class="label">Contact</p>
         <h2>풀고 싶은 문제를<br>한 문단으로 보내 주세요</h2>
         <p>어떤 거래·데이터·업무에서 무엇이 어려운지 알려 주시면, 어디서부터 시작하면 좋을지 제안해 드립니다.</p>
+        <p class="mail">hitzet.soft@gmail.com</p>
       </div>
       <div class="actions">
-        <!-- 문의 메일 주소: 아래 href 를 실제 주소(mailto:...)로 바꾸고 aria-disabled 를 지우면 활성화된다 -->
-        <a class="btn btn-red" id="contact-mail" href="#contact" aria-disabled="true">문의 메일 준비 중</a>
+        <a class="btn btn-black" href="mailto:hitzet.soft@gmail.com?subject=%5BHITZET%5D%20%EA%B3%BC%EC%A0%9C%20%EC%83%81%EB%8B%B4">이메일 보내기 <span class="arr">→</span></a>
         <a class="btn btn-line" href="https://github.com/hitzet" target="_blank" rel="noopener noreferrer">GitHub <span class="arr">↗</span></a>
       </div>
     </div>
@@ -453,15 +294,13 @@
 <footer>
   <div class="wrap foot">
     <span>HITZET · ORFE-based Financial Security, Fraud &amp; AI Lab · <span class="mono">&copy; <span id="year">2026</span></span></span>
-    <span><a href="#practice">전문 분야</a> · <a href="#approach">일하는 방식</a> · <a href="https://github.com/hitzet" target="_blank" rel="noopener noreferrer">GitHub</a></span>
+    <span><a href="#practice">전문 분야</a> · <a href="#approach">일하는 방식</a> · <a href="mailto:hitzet.soft@gmail.com">이메일</a> · <a href="/en/" hreflang="en">English</a></span>
   </div>
 </footer>
 
 <script>
   // 연도 자동 갱신
   document.getElementById('year').textContent = new Date().getFullYear();
-  // 비활성 문의 버튼은 페이지가 튀지 않게 막는다
-  document.querySelectorAll('[aria-disabled="true"]').forEach(a => a.addEventListener('click', e => e.preventDefault()));
   // 화면에 들어온 섹션만 부드럽게 나타나게 (IntersectionObserver 미지원이면 바로 표시)
   const fades = document.querySelectorAll('.fade');
   if ('IntersectionObserver' in window) {
