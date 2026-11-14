@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- HITZET 마크: 검은 바탕 위 오렌지 선. 가운데 점(이상치)을 실선 원이 짚고, 바깥 점선 원이 감싼다.
-       "분포 밖의 이상치를 먼저 본다"는 뜻. 독자 디자인. -->
-  <rect width="64" height="64" rx="14" fill="#0b0b0d"/>
-  <circle cx="32" cy="32" r="4.5" fill="#f58025"/>
-  <circle cx="32" cy="32" r="13" stroke="#f58025" stroke-width="3"/>
-  <circle cx="32" cy="32" r="22" stroke="#ff9d4d" stroke-width="2" stroke-dasharray="3.5 4.5"/>
+  <!-- HITZET 마크: 종 모양 분포 곡선(정상 거래) 오른쪽 꼬리 밖에 오렌지 점 하나(이상치).
+       "데이터의 분포를 알고, 그 밖의 위험을 먼저 본다"는 뜻. 독자 디자인. -->
+  <rect width="64" height="64" rx="14" fill="#141417"/>
+  <path d="M9 45 H55" stroke="#3a3a42" stroke-width="2" stroke-linecap="round"/>
+  <path d="M9 44 C19 44 21 17 29 17 C37 17 39 44 49 44" stroke="#f58025" stroke-width="4.5" stroke-linecap="round"/>
+  <circle cx="53" cy="27" r="4.5" fill="#f58025"/>
 </svg>
