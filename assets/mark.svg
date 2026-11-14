@@ -1,16 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <!-- HITZET 마크: 검은 바탕 위 오렌지 버블. 큰 원(시장)과 작은 원들(거래)이 떠오르고,
-       그중 하나만 테두리로 떨어져 나간다 — "분포 밖의 이상치를 먼저 본다"는 뜻. 독자 디자인. -->
-  <defs>
-    <radialGradient id="b" cx="35%" cy="30%" r="75%">
-      <stop offset="0" stop-color="#ffb066"/>
-      <stop offset=".55" stop-color="#f58025"/>
-      <stop offset="1" stop-color="#c2560c"/>
-    </radialGradient>
-  </defs>
+  <!-- HITZET 마크: 검은 바탕 위 오렌지 선. 가운데 점(이상치)을 실선 원이 짚고, 바깥 점선 원이 감싼다.
+       "분포 밖의 이상치를 먼저 본다"는 뜻. 독자 디자인. -->
   <rect width="64" height="64" rx="14" fill="#0b0b0d"/>
-  <circle cx="27" cy="36" r="15" fill="url(#b)"/>
-  <circle cx="44" cy="22" r="6.5" fill="url(#b)"/>
-  <circle cx="45" cy="42" r="4" fill="url(#b)" opacity=".85"/>
-  <circle cx="51" cy="11.5" r="3.2" fill="none" stroke="#f58025" stroke-width="1.8"/>
+  <circle cx="32" cy="32" r="4.5" fill="#f58025"/>
+  <circle cx="32" cy="32" r="13" stroke="#f58025" stroke-width="3"/>
+  <circle cx="32" cy="32" r="22" stroke="#ff9d4d" stroke-width="2" stroke-dasharray="3.5 4.5"/>
 </svg>

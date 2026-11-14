@@ -62,11 +62,12 @@ h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); line-height: 1.25; letter-spacing:
 /* 오렌지 버블 그림 (오른쪽) */
 .bubbles { width: 100%; max-width: 460px; justify-self: end; }
 @media (max-width: 999px) { .bubbles { justify-self: start; max-width: 340px; } }
-.bubbles .rise { animation: rise 9s ease-in-out infinite alternate; transform-origin: center; transform-box: fill-box; }
-.bubbles .rise.d2 { animation-duration: 11s; animation-delay: -3s; }
-.bubbles .rise.d3 { animation-duration: 13s; animation-delay: -6s; }
-@keyframes rise { from { transform: translateY(6px); } to { transform: translateY(-10px); } }
-.hero-glow { position: absolute; width: 720px; height: 720px; right: -220px; top: -260px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(245,128,37,.22), transparent 62%); }
+/* 이상치를 감싼 점선 링이 천천히 돈다 (바깥 링은 반대 방향) */
+.bubbles .spin { animation: spin 40s linear infinite; transform-origin: center; transform-box: fill-box; }
+.bubbles .spin.rev { animation-duration: 70s; animation-direction: reverse; }
+@keyframes spin { to { transform: rotate(360deg); } }
+/* 배경 오렌지 빛은 아주 옅게만 — 선 위주의 절제된 화면을 위해 */
+.hero-glow { position: absolute; width: 720px; height: 720px; right: -220px; top: -260px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(245,128,37,.10), transparent 62%); }
 .hero-grid { position: relative; display: grid; gap: 48px; grid-template-columns: minmax(0, 1fr); align-items: center; }
 @media (min-width: 1000px) { .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); } }
 .hero-grid > * { min-width: 0; }
@@ -186,6 +187,6 @@ footer { border-top: 1px solid var(--line-soft); margin-top: 96px; }
 .fade.on { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .fade { opacity: 1; transform: none; transition: none; }
-  .bubbles .rise { animation: none; }
+  .bubbles .spin { animation: none; }
   html { scroll-behavior: auto; }
 }
